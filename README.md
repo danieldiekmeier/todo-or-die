@@ -4,7 +4,7 @@ A JavaScript version of [Searls' todo_or_die gem](https://github.com/searls/todo
 
 ## Usage
 
-```
+```sh
 npm i todo-or-die
 ```
 
@@ -24,14 +24,12 @@ To understand why you would ever call a method to write a comment, [read Searls'
 
 ### What kind of error?
 
-`todo-or-die` throws an `OverdueError` when your time's up.
-
-You can also `import { OverdueError } from 'todo-or-die'` if you need it.
+`todo-or-die` throws an `OverdueError` when your time's up. You can also `import { OverdueError } from 'todo-or-die'` if you need it.
 
 
 ### Custom Death
 
-```
+```js
 todoOrDie.config.die = (message, by) => {
   sendEmailToKaren('Oh no, Karen, your stuff broke')
 }
