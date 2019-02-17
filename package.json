@@ -1,0 +1,26 @@
+{
+  "name": "todo-or-die",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "module": "src/main.js",
+  "scripts": {
+    "test": "ava",
+    "test:watch": "ava --watch --verbose"
+  },
+  "keywords": [],
+  "author": "Daniel Diekmeier",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^1.2.1",
+    "esm": "^3.2.5"
+  },
+  "ava": {
+    "files": [
+      "./tests/*.test.js"
+    ],
+    "require": [
+      "esm"
+    ]
+  }
+}
