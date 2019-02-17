@@ -12,7 +12,9 @@
   "author": "Daniel Diekmeier",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^1.2.1",
+    "ava": "^1.2.1"
+  },
+  "dependencies": {
     "esm": "^3.2.5"
   },
   "ava": {
