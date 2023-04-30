@@ -1,28 +1,27 @@
-import test from 'ava'
+import test, { beforeEach } from 'node:test'
+import assert from 'node:assert'
 import todoOrDie, { OverdueError } from '../src/main.js'
 
-test.beforeEach(t => {
+beforeEach(() => {
   todoOrDie.reset()
 })
 
-test.serial('not due todo does nothing', t => {
+test('not due todo does nothing', () => {
   const later = new Date(Date.now() + 1000)
 
-  t.notThrows(() => todoOrDie('Fix stuff', later))
+  assert.doesNotThrow(() => todoOrDie('Fix stuff', later))
 })
 
-test.serial('due todo blows up', t => {
+test('due todo blows up', () => {
   const now = new Date('2010-02-04')
 
-  t.throws(
-    () => todoOrDie('Fix stuff', now), {
-      instanceOf: OverdueError,
-      message: 'TODO: "Fix stuff" came due on 2010-02-04. Do it!'
-    }
-  )
+  assert.throws(() => todoOrDie('Fix stuff', now), OverdueError)
+  assert.throws(() => todoOrDie('Fix stuff', now), {
+    message: 'TODO: "Fix stuff" came due on 2010-02-04. Do it!',
+  })
 })
 
-test.serial('config custom explosion', t => {
+test('config custom explosion', () => {
   let actualMessage
   let actualBy
 
@@ -36,25 +35,28 @@ test.serial('config custom explosion', t => {
 
   const result = todoOrDie('kaka', someTime)
 
-  t.is(result, 'pants')
-  t.is(actualMessage, 'kaka')
-  t.deepEqual(actualBy, someTime)
+  assert.equal(result, 'pants')
+  assert.equal(actualMessage, 'kaka')
+  assert.deepEqual(actualBy, someTime)
 })
 
-test.serial('config and reset', t => {
+test('config and reset', () => {
   const originalDie = todoOrDie.config.die
 
-  function someLambda () {}
+  function someLambda() {}
   todoOrDie.config.die = someLambda
 
   todoOrDie.reset()
 
-  t.is(todoOrDie.config.die, originalDie)
+  assert.equal(todoOrDie.config.die, originalDie)
 })
 
-test.serial('todo or die file path removed from backtrace', t => {
+test('todo or die file path removed from backtrace', () => {
   const now = new Date('2010-02-04')
-  const error = t.throws(() => todoOrDie('Fix stuff', now))
 
-  t.false(error.stack.includes('todo-or-die/index.js'))
+  try {
+    todoOrDie('Fix stuff', now)
+  } catch (error) {
+    assert.equal(error.stack.includes('todo-or-die/index.js'), false)
+  }
 })

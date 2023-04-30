@@ -1,28 +1,13 @@
 {
   "name": "todo-or-die",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
-  "main": "src/index.js",
-  "module": "src/main.js",
+  "main": "src/main.js",
+  "type": "module",
   "scripts": {
-    "test": "ava",
-    "test:watch": "ava --watch --verbose"
+    "test": "node --test"
   },
-  "keywords": [],
+  "keywords": ["todo", "die", "todo-or-die", "todo or die", "todoordie"],
   "author": "Daniel Diekmeier",
-  "license": "ISC",
-  "devDependencies": {
-    "ava": "^1.2.1"
-  },
-  "dependencies": {
-    "esm": "^3.2.5"
-  },
-  "ava": {
-    "files": [
-      "./tests/*.test.js"
-    ],
-    "require": [
-      "esm"
-    ]
-  }
+  "license": "ISC"
 }
